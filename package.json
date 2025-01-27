@@ -1,0 +1,41 @@
+{
+  "name": "@kingmaj0r/libfm",
+  "version": "1.0.0",
+  "main": "dist/libfm.cjs.js",
+  "module": "dist/libfm.es.js",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/libfm.es.js",
+      "require": "./dist/libfm.cjs.js"
+    },
+    "./lib": {
+      "types": "./dist/types/lib/index.d.ts",
+      "import": "./dist/lib/index.es.js",
+      "require": "./dist/lib/index.cjs.js"
+    },
+    "./electron": {
+      "types": "./dist/types/electron/index.d.ts",
+      "import": "./dist/electron/index.es.js",
+      "require": "./dist/electron/index.cjs.js"
+    }
+  },
+  "types": "dist/types/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.12",
+    "@types/node": "^22.10.10",
+    "electron": "^34.0.1"
+  }
+}

@@ -26,9 +26,12 @@
     "build": "vite build && tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "KingMaj0r",
+  "license": "MIT",
+  "description": "Electron & nodejs bindings for libfm.",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "typescript": "^5.7.3",
     "vite": "^6.0.11"

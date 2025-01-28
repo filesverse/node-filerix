@@ -1,6 +1,6 @@
 {
   "name": "@kingmaj0r/libfm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/libfm.cjs",
   "module": "dist/libfm.js",
   "exports": {

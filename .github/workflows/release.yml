@@ -6,7 +6,7 @@ on:
       - published
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,16 +25,39 @@ jobs:
       - name: Build package
         run: npm run build
 
-      - name: Publish to npmjs
+    
+  publish-npm:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish --access public
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - name: Publish to GitHub Package Registry
+  publish-gpr:
+    needs: [build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://npm.pkg.github.com"
+      - run: npm ci
+      - run: npm publish --access public
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
-          npm publish --registry=https://npm.pkg.github.com
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

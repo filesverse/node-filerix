@@ -8,20 +8,22 @@ export default defineConfig({
         lib: "src/lib/index.ts",
         electron: "src/electron/index.ts",
       },
+      formats: ['es', 'cjs'],
       name: "libfm",
       fileName: (format, entryName) => {
+        const ext = format === "cjs" ? "cjs" : "js";
         switch (entryName) {
           case "lib":
-            return `lib/index.${format}.js`;
+            return `lib/index.${ext}`;
           case "electron":
-            return `electron/index.${format}.js`;
+            return `electron/index.${ext}`;
           default:
-            return `libfm.${format}.js`;
+            return `libfm.${ext}`;
         }
       }
     },
     rollupOptions: {
-      external: ["path", "fs", "electron"],
+      external: ["path", "fs", "electron", "module"],
       output: {
         exports: "named",
         dir: "dist"

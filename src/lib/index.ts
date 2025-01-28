@@ -1,3 +1,5 @@
+import { createRequire } from "module";
+
 interface Libfm {
   getFiles: (path: string) => FileList;
   getUserName: () => string;
@@ -48,14 +50,16 @@ let libfm: Libfm = {
 export function init(fmNodeLocation: string) {
   fmNodePath = fmNodeLocation;
   loadLibfm();
+  console.log("Libfm successfully initialized.");
 }
 
-export function loadLibfm() {
+function loadLibfm() {
   if (!fmNodePath) {
     throw new Error("Libfm not initialized. Please call init() with the path to 'fm.node'.");
   }
 
   try {
+    const require = createRequire(import.meta.url);
     libfm = require(fmNodePath);
   } catch (error) {
     console.error("Failed to load libfm:", error);

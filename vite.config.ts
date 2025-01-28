@@ -8,17 +8,16 @@ export default defineConfig({
         lib: "src/lib/index.ts",
         electron: "src/electron/index.ts",
       },
-      formats: ['es', 'cjs'],
       name: "libfm",
       fileName: (format, entryName) => {
         const ext = format === "cjs" ? "cjs" : "js";
         switch (entryName) {
           case "lib":
-            return `lib/index.${ext}`;
+            return `lib/index.${format}.js`;
           case "electron":
-            return `electron/index.${ext}`;
+            return `electron/index.${format}.js`;
           default:
-            return `libfm.${ext}`;
+            return `libfm.${format}.js`;
         }
       }
     },

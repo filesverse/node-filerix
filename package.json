@@ -1,13 +1,13 @@
 {
-  "name": "@kingmaj0r/libfm",
+  "name": "@kingmaj0r/filerix",
   "version": "1.0.2",
-  "main": "dist/libfm.cjs.js",
-  "module": "dist/libfm.es.js",
+  "main": "dist/filerix.cjs.js",
+  "module": "dist/filerix.es.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/libfm.es.js",
-      "require": "./dist/libfm.cjs.js"
+      "import": "./dist/filerix.es.js",
+      "require": "./dist/filerix.cjs.js"
     },
     "./lib": {
       "types": "./dist/types/lib/index.d.ts",
@@ -27,7 +27,7 @@
   "keywords": [],
   "author": "KingMaj0r",
   "license": "MIT",
-  "description": "Electron & nodejs bindings for libfm.",
+  "description": "Electron & nodejs bindings for filerix.",
   "dependencies": {
     "typescript": "^5.7.3",
     "vite": "^6.0.11"

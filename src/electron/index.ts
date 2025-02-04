@@ -1,5 +1,5 @@
 import { ipcMain, IpcMainEvent } from "electron";
-import libfm, {
+import {
   copyFile,
   getFiles,
   searchFiles,
@@ -8,13 +8,19 @@ import libfm, {
   getDeviceLabelOrUUID,
   getDriveUsage,
   mountDrive,
-  unmountDrive
+  unmountDrive,
+  startDriveListener,
+  stopDriveListener,
+  startFileListener,
+  stopFileListener,
 } from "../lib/index.js";
 
-export default function initFM({ debug = "none" }: { debug?: "debug" | "info" | "warning" | "error" | "none" } = { }) {
-  libfm.initLogger(debug);
-
+export default function initFM() {
   ipcMain.on("copyFile", (event: IpcMainEvent, path: string, destination: string) => {
+    event.returnValue = copyFile(path, destination);
+  });
+
+  ipcMain.on("cutFile", (event: IpcMainEvent, path: string, destination: string) => {
     event.returnValue = copyFile(path, destination);
   });
 
@@ -48,5 +54,29 @@ export default function initFM({ debug = "none" }: { debug?: "debug" | "info" | 
 
   ipcMain.on("unmountDrive", (event: IpcMainEvent, disk: string) => {
     event.returnValue = unmountDrive(disk);
+  });
+
+  ipcMain.on("startDriveListener", (event: IpcMainEvent) => {
+    startDriveListener((action: string, device: string) => {
+      event.sender.send("startDriveListener-event", { action, device });
+    });
+    event.returnValue = true;
+  });
+
+  ipcMain.on("stopDriveListener", (event: IpcMainEvent) => {
+    stopDriveListener();
+    event.returnValue = true;
+  });
+
+  ipcMain.on("startFileListener", (event: IpcMainEvent, path: string) => {
+    startFileListener(path, (action: string, device: string) => {
+      event.sender.send("startFileListener-event", { action, device });
+    });
+    event.returnValue = true;
+  });
+
+  ipcMain.on("stopFileListener", (event: IpcMainEvent) => {
+    stopFileListener();
+    event.returnValue = true;
   });
 }

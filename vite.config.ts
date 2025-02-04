@@ -8,7 +8,7 @@ export default defineConfig({
         lib: "src/lib/index.ts",
         electron: "src/electron/index.ts",
       },
-      name: "libfm",
+      name: "filerix",
       fileName: (format, entryName) => {
         const ext = format === "cjs" ? "cjs" : "js";
         switch (entryName) {
@@ -17,7 +17,7 @@ export default defineConfig({
           case "electron":
             return `electron/index.${format}.js`;
           default:
-            return `libfm.${format}.js`;
+            return `filerix.${format}.js`;
         }
       }
     },

@@ -14,6 +14,10 @@ interface Libfm {
   mountDrive: (disk: string) => any;
   unmountDrive: (disk: string) => any;
   initLogger: (...args: any[]) => any;
+  startDriveListener: (callback: (action: string, device: string) => void) => any;
+  stopDriveListener: () => any;
+  startFileListener: (path: string ,callback: (eventType: string, filePath: string) => void) => any;
+  stopFileListener: () => any;
 }
 
 interface FileEntry {
@@ -45,6 +49,10 @@ let libfm: Libfm = {
   mountDrive: dummyFunction,
   unmountDrive: dummyFunction,
   initLogger: dummyFunction,
+  startDriveListener: dummyFunction,
+  stopDriveListener: dummyFunction,
+  startFileListener: dummyFunction,
+  stopFileListener: dummyFunction,
 };
 
 export function init(fmNodeLocation: string) {
@@ -68,51 +76,143 @@ function loadLibfm() {
 }
 
 export function getUserName(): string {
-  return libfm.getUserName();
+  try {
+    return libfm.getUserName();
+  } catch (error) {
+    console.error("Error in getUserName:", error);
+    throw new Error("Failed to get the user name. Please check the system or configuration.");
+  }
 }
 
 export function getFiles(path: string): FileList {
-  return libfm.getFiles(path);
+  try {
+    return libfm.getFiles(path);
+  } catch (error) {
+    console.error("Error in getFiles:", error);
+    throw new Error("Failed to fetch files. Please verify the path and try again.");
+  }
 }
 
 export function searchFiles(currentPath: string, searchQuery: string): FileList {
-  return libfm.searchFiles(currentPath, searchQuery);
+  try {
+    return libfm.searchFiles(currentPath, searchQuery);
+  } catch (error) {
+    console.error("Error in searchFiles:", error);
+    throw new Error("Failed to search files. Ensure the path and query are correct.");
+  }
 }
 
 export function getDrives(): FileList {
-  return libfm.getDrives();
+  try {
+    return libfm.getDrives();
+  } catch (error) {
+    console.error("Error in getDrives:", error);
+    throw new Error("Failed to retrieve drives. Please check the system setup.");
+  }
 }
 
 export function getDriveUsage(disk: string): any {
-  return libfm.getDriveUsage(disk);
+  try {
+    return libfm.getDriveUsage(disk);
+  } catch (error) {
+    console.error("Error in getDriveUsage:", error);
+    throw new Error("Failed to get drive usage. Verify the disk identifier and try again.");
+  }
 }
 
 export function getDeviceLabelOrUUID(disk: string): any {
-  return libfm.getDeviceLabelOrUUID(disk);
+  try {
+    return libfm.getDeviceLabelOrUUID(disk);
+  } catch (error) {
+    console.error("Error in getDeviceLabelOrUUID:", error);
+    throw new Error("Failed to get device label or UUID. Check the disk identifier.");
+  }
 }
 
 export function mountDrive(disk: string): any {
-  return libfm.mountDrive(disk);
+  try {
+    return libfm.mountDrive(disk);
+  } catch (error) {
+    console.error("Error in mountDrive:", error);
+    throw new Error("Failed to mount drive. Ensure the disk is available.");
+  }
 }
 
 export function unmountDrive(disk: string): any {
-  return libfm.unmountDrive(disk);
+  try {
+    return libfm.unmountDrive(disk);
+  } catch (error) {
+    console.error("Error in unmountDrive:", error);
+    throw new Error("Failed to unmount drive. Ensure the disk is not in use.");
+  }
 }
 
 export function copyFile(path: string, destination: string): any {
-  return libfm.copyFile(path, destination);
+  try {
+    return libfm.copyFile(path, destination);
+  } catch (error) {
+    console.error("Error in copyFile:", error);
+    throw new Error("Failed to copy the file. Check the source and destination paths.");
+  }
 }
 
 export function cutFile(path: string, destination: string): any {
-  return libfm.cutFile(path, destination);
+  try {
+    return libfm.cutFile(path, destination);
+  } catch (error) {
+    console.error("Error in cutFile:", error);
+    throw new Error("Failed to move the file. Verify the source and destination paths.");
+  }
 }
 
 export function renameFile(path: string, newName: string): any {
-  return libfm.renameFile(path, newName);
+  try {
+    return libfm.renameFile(path, newName);
+  } catch (error) {
+    console.error("Error in renameFile:", error);
+    throw new Error("Failed to rename the file. Ensure the file path and new name are valid.");
+  }
 }
 
 export function compressFile(path: string, destination: string): any {
-  return libfm.compressFile(path, destination);
+  try {
+    return libfm.compressFile(path, destination);
+  } catch (error) {
+    console.error("Error in compressFile:", error);
+    throw new Error("Failed to compress the file. Check the source and destination paths.");
+  }
+}
+
+export function startDriveListener(callback: (action: string, device: string) => void): any {
+  try {
+    return libfm.startDriveListener(callback);
+  } catch (error) {
+    console.error("Error in startDriveListener:", error);
+  }
+}
+
+export function stopDriveListener(): any {
+  try {
+    return libfm.stopDriveListener();
+  } catch (error) {
+    console.error("Error in stopDriveListener:", error);
+  }
+}
+
+export function startFileListener(path: string, callback: (eventType: string, filePath: string) => void): any {
+  try {
+    return libfm.startFileListener(path, callback);
+  } catch (error) {
+    console.error("Error in startFileListener:", error);
+  }
+}
+
+export function stopFileListener(): any {
+  try {
+    return libfm.stopFileListener();
+  } catch (error) {
+    console.error("Error in stopFileListener:", error);
+  }
 }
 
 export default libfm;

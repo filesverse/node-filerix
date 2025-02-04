@@ -8,82 +8,65 @@ interface FileEntry {
 type FileList = FileEntry[];
 
 export function getUserName(): string {
-  try {
-    return window.ipcRenderer.sendSync("getUserName");
-  } catch (error) {
-    console.error("Failed to get username:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("getUserName");
 }
 
 export function getFiles(path: string): FileList {
-  try {
-    return window.ipcRenderer.sendSync("getFiles", path);
-  } catch (error) {
-    console.error("Failed to fetch files:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("getFiles", path);
 }
 
 export function searchFiles(currentPath: string, searchQuery: string): FileList {
-  try {
-    return window.ipcRenderer.sendSync("searchFiles", currentPath, searchQuery);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("searchFiles", currentPath, searchQuery);
 }
 
 export function getDrives(): FileList {
-  try {
-    return window.ipcRenderer.sendSync("getDrives");
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("getDrives");
 }
 
 export function getDriveUsage(disk: string) {
-  try {
-    return window.ipcRenderer.sendSync("getDriveUsage", disk);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("getDriveUsage", disk);
 }
 
 export function getDeviceLabelOrUUID(disk: string) {
-  try {
-    return window.ipcRenderer.sendSync("getDeviceLabelOrUUID", disk);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("getDeviceLabelOrUUID", disk);
 }
 
 export function mountDrive(disk: string) {
-  try {
-    return window.ipcRenderer.sendSync("mountDrive", disk);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("mountDrive", disk);
 }
 
 export function unmountDrive(disk: string) {
-  try {
-    return window.ipcRenderer.sendSync("unmountDrive", disk);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("unmountDrive", disk);
 }
 
 export function copyFile(path: string, destination: string) {
-  try {
-    return window.ipcRenderer.sendSync("copyFile", path, destination);
-  } catch (error) {
-    console.error("Error during file search:", error);
-    throw error;
-  }
+  return window.ipcRenderer.sendSync("copyFile", path, destination);
+}
+
+export function cutFile(path: string, destination: string) {
+  return window.ipcRenderer.sendSync("cutFile", path, destination);
+}
+
+export function startDriveListener(callback: (action: string, device: string) => void) {
+  window.ipcRenderer.sendSync("startDriveListener");
+
+  window.ipcRenderer.on("startDriveListener-event", (_, { action, device }) => {
+    callback(action, device);
+  });
+}
+
+export function stopDriveListener() {
+  return window.ipcRenderer.sendSync("stopDriveListener");
+}
+
+export function startFileListener(path: string, callback: (eventType: string, filePath: string) => void) {
+  window.ipcRenderer.sendSync("startFileListener", path);
+
+  window.ipcRenderer.on("stopDriveListener-event", (_, { eventType, filePath }) => {
+    callback(eventType, filePath);
+  });
+}
+
+export function stopFileListener() {
+  return window.ipcRenderer.sendSync("stopFileListener");
 }

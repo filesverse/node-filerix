@@ -20,6 +20,10 @@
       "require": "./dist/electron/index.cjs.js"
     }
   },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "vite build && tsc"

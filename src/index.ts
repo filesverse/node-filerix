@@ -62,7 +62,7 @@ export function stopDriveListener() {
 export function startFileListener(path: string, callback: (eventType: string, filePath: string) => void) {
   window.ipcRenderer.sendSync("startFileListener", path);
 
-  window.ipcRenderer.on("stopDriveListener-event", (_, { eventType, filePath }) => {
+  window.ipcRenderer.on("startFileListener-event", (_, { eventType, filePath }) => {
     callback(eventType, filePath);
   });
 }

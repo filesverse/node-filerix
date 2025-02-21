@@ -1,0 +1,9 @@
+{
+  "name": "node-filerix",
+  "version-string": "0.0.1",
+  "license": "MIT",
+  "dependencies": [
+    "node-api-headers",
+    "node-addon-api"
+  ]
+}

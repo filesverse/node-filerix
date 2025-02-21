@@ -69,8 +69,8 @@ export default function initFM() {
   });
 
   ipcMain.on("startFileListener", (event: IpcMainEvent, path: string) => {
-    startFileListener(path, (action: string, device: string) => {
-      event.sender.send("startFileListener-event", { action, device });
+    startFileListener(path, (eventType: string, filePath: string) => {
+      event.sender.send("startFileListener-event", { eventType, filePath });
     });
     event.returnValue = true;
   });

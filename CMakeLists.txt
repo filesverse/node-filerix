@@ -7,15 +7,13 @@ project(node-filerix VERSION 1.0.2 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(
+  ${CMAKE_SOURCE_DIR}/include 
+  ${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-linux/include
+)
 
-find_package(PkgConfig REQUIRED)
+find_package(filerix CONFIG REQUIRED)
 find_package(unofficial-node-api-headers CONFIG REQUIRED)
-
-pkg_check_modules(FILERIX REQUIRED filerix)
-find_library(FILERIX_LIB NAMES filerix REQUIRED)
-
-include_directories(${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-linux/include)
 
 add_library(node_filerix MODULE wrapper.cc)
 set_target_properties(node_filerix PROPERTIES 
@@ -24,13 +22,8 @@ set_target_properties(node_filerix PROPERTIES
   SUFFIX ".node"
 )
 
-target_include_directories(node_filerix PRIVATE 
-  ${FILERIX_INCLUDE_DIRS}
-  ${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-linux/include
-)
-
 target_link_libraries(node_filerix PRIVATE 
-  ${FILERIX_LIB}
+  filerix::filerix
   unofficial::node-api-headers::node-api-headers
 )
 

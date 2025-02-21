@@ -1,6 +1,6 @@
 {
-  "name": "@kingmaj0r/filerix",
-  "version": "1.0.3",
+  "name": "filesverse/filerix",
+  "version": "1.1.0",
   "main": "dist/filerix.cjs.js",
   "module": "dist/filerix.es.js",
   "exports": {

@@ -8,7 +8,13 @@ cd "$TMP_DIR" || { echo "Failed to enter temp directory"; exit 1; }
 echo "Cloning the repository with submodules..."
 git clone --recurse-submodules https://github.com/filesverse/node-filerix.git || { echo "Failed to clone repository"; exit 1; }
 
+echo "Downloading filerix vcpkg port..."
+git clone --recurse-submodules https://github.com/filesverse/vcpkg-port.git || { echo "Failed to download filerix vcpkg port"; exit 1; }
+
 cd node-filerix || { echo "Failed to enter the project directory"; exit 1; }
+
+echo "Copying filerix vcpkg port..."
+mv ../vcpkg-port ./vcpkg/ports/filerix || { echo "Failed to copy filerix vcpkg port"; exit 1; }
 
 echo "Bootstrapping vcpkg..."
 ./vcpkg/bootstrap-vcpkg.sh || { echo "Failed to bootstrap vcpkg"; exit 1; }

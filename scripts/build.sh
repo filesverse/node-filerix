@@ -17,7 +17,7 @@ mkdir build && cd build
 cmake .. || { echo "Failed to generate CMake build files"; exit 1; }
 
 echo "Building the project..."
-cmake --build . --parallel || { echo "Build failed"; exit 1; }
+cmake --build . --parallel --config Release || { echo "Build failed"; exit 1; }
 cd ..
 
 echo "Installation and build complete!"

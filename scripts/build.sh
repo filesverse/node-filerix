@@ -13,9 +13,10 @@ echo "Installing dependencies with vcpkg..."
 ./vcpkg/vcpkg --feature-flags=manifests install || { echo "Failed to install dependencies"; exit 1; }
 
 echo "Generating build files with CMake..."
-cmake -S . -B build || { echo "Failed to generate CMake build files"; exit 1; }
+mkdir build && cd build
+cmake .. || { echo "Failed to generate CMake build files"; exit 1; }
 
 echo "Building the project..."
-cmake --build build --config Release || { echo "Build failed"; exit 1; }
+cmake --build . --parallel || { echo "Build failed"; exit 1; }
 
 echo "Installation and build complete!"

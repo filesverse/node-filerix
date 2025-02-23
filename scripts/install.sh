@@ -1,5 +1,10 @@
 #!/bin/bash
 
+NO_INSTALL=0
+if [[ "$1" == "--noinstall" ]]; then
+  NO_INSTALL=1
+fi
+
 TMP_DIR=$(mktemp -d) || { echo "Failed to create temp directory"; exit 1; }
 echo "Using temporary directory: $TMP_DIR"
 
@@ -28,8 +33,10 @@ cmake -B build -S . || { echo "Failed to generate cmake build files"; exit 1; }
 echo "Building the project..."
 cmake --build build || { echo "Build failed"; exit 1; }
 
-echo "Installing the built project..."
-cd build && make install || { echo "Installation failed"; exit 1; }
+if [[ $NO_INSTALL -eq 0 ]]; then
+  echo "Installing the built project..."
+  cd build && sudo make install || { echo "Installation failed"; exit 1; }
+fi
 
 cd "$HOME" || { echo "Failed to return to home directory"; exit 1; }
 

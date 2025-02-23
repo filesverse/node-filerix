@@ -2,17 +2,24 @@ import { createRequire } from "module";
 import fs from "fs";
 
 const require = createRequire(import.meta.url);
-const fmNodePath = "/usr/local/lib/node_modules/filerix.node";
 
-if (!fs.existsSync(fmNodePath)) {
-  console.error(`Error: Ensure that 'node-filerix' is installed or built. Expected file not found: ${fmNodePath}`);
+const possiblePaths = [
+  "/usr/local/lib/node_modules/filerix/filerix.node",
+  "/usr/lib/node_modules/filerix/filerix.node",
+  "/usr/lib64/node_modules/filerix/filerix.node"
+];
+
+const addonPath = possiblePaths.find(fs.existsSync);
+
+if (!addonPath) {
+  console.error(`Error: Ensure that 'node-filerix' is installed or built. Expected file not found: ${addonPath}`);
   process.exit(1);
 }
 
 let filerix: Filerix;
 
 try {
-  filerix = require(fmNodePath);
+  filerix = require(addonPath);
 } catch (error) {
   console.error("Error: Failed to load 'node-filerix'. Ensure it is built correctly.", error);
   process.exit(1);

@@ -2,15 +2,12 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
-project(node-filerix VERSION 1.1.0 LANGUAGES CXX)
+project(node-filerix VERSION 1.1.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(
-  ${CMAKE_SOURCE_DIR}/include 
-  ${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-linux/include
-)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 find_package(filerix CONFIG REQUIRED)
 find_package(unofficial-node-addon-api CONFIG REQUIRED)
@@ -28,6 +25,6 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  LIBRARY DESTINATION lib/node_modules
+  LIBRARY DESTINATION lib/node_modules/filerix
   RUNTIME DESTINATION bin
 )

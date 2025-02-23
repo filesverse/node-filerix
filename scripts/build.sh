@@ -1,15 +1,10 @@
 #!/bin/bash
 
-TMP_DIR=$(mktemp -d) || { echo "Failed to create temp directory"; exit 1; }
-echo "Using temporary directory: $TMP_DIR"
-
-cd "$TMP_DIR" || { echo "Failed to enter temp directory"; exit 1; }
-
 echo "Downloading filerix vcpkg port..."
 git clone --recurse-submodules https://github.com/filesverse/vcpkg-port.git || { echo "Failed to download filerix vcpkg port"; exit 1; }
 
 echo "Copying filerix vcpkg port..."
-mv $TMP_DIR/vcpkg-port ./vcpkg/ports/filerix || { echo "Failed to copy filerix vcpkg port"; exit 1; }
+mv ./vcpkg-port ./vcpkg/ports/filerix || { echo "Failed to copy filerix vcpkg port"; exit 1; }
 
 echo "Bootstrapping vcpkg..."
 ./vcpkg/bootstrap-vcpkg.sh || { echo "Failed to bootstrap vcpkg"; exit 1; }
@@ -22,8 +17,5 @@ cmake -B build -S . || { echo "Failed to generate cmake build files"; exit 1; }
 
 echo "Building the project..."
 cmake --build build || { echo "Build failed"; exit 1; }
-
-echo "Removing temporary folder: $TMP_DIR"
-rm -rf "$TMP_DIR" || { echo "Removing temp folder failed"; exit 1; }
 
 echo "Installation and build complete!"

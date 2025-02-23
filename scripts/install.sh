@@ -29,7 +29,7 @@ echo "Building the project..."
 cmake --build build || { echo "Build failed"; exit 1; }
 
 echo "Installing the built project..."
-cd build && sudo make install || { echo "Installation failed"; exit 1; }
+cd build && make install || { echo "Installation failed"; exit 1; }
 
 cd "$HOME" || { echo "Failed to return to home directory"; exit 1; }
 

@@ -1,8 +1,8 @@
 #ifndef FILES_BINDING_HPP
 #define FILES_BINDING_HPP
 
-#include "filerix/FileSystem/FileUtils.h"
-#include "filerix/napi/Utils/FileUtils.hpp"
+#include "Bindings/FileSystem/FileUtils.h"
+#include "Bindings/napi/Utils/FileUtils.hpp"
 
 #include <napi.h>
 

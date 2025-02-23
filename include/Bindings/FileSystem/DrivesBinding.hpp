@@ -1,7 +1,7 @@
 #ifndef DRIVES_BINDING_HPP
 #define DRIVES_BINDING_HPP
 
-#include "filerix/FileSystem/DriveUtils.h"
+#include "Bindings/FileSystem/DriveUtils.h"
 
 #include <napi.h>
 

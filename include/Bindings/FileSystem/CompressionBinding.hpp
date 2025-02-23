@@ -1,7 +1,7 @@
 #ifndef COMPRESSION_BINDING_HPP
 #define COMPRESSION_BINDING_HPP
 
-#include "filerix/FileSystem/FileUtils.h"
+#include "Bindings/FileSystem/FileUtils.h"
 
 #include <napi.h>
 

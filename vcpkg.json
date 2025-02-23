@@ -4,6 +4,6 @@
   "license": "MIT",
   "dependencies": [
     "filerix",
-    "node-api-headers"
+    "node-addon-api"
   ]
 }

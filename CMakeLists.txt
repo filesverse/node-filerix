@@ -13,9 +13,9 @@ include_directories(
 )
 
 find_package(filerix CONFIG REQUIRED)
-find_package(unofficial-node-api-headers CONFIG REQUIRED)
+find_package(unofficial-node-addon-api CONFIG REQUIRED)
 
-add_library(node_filerix MODULE wrapper.cc)
+add_library(node_filerix SHARED wrapper.cc)
 set_target_properties(node_filerix PROPERTIES 
   OUTPUT_NAME "filerix"
   PREFIX "" 
@@ -24,7 +24,7 @@ set_target_properties(node_filerix PROPERTIES
 
 target_link_libraries(node_filerix PRIVATE 
   filerix::filerix
-  unofficial::node-api-headers::node-api-headers
+  unofficial::node-addon-api::node-addon-api
 )
 
 install(TARGETS node_filerix

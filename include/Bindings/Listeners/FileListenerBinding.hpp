@@ -1,7 +1,7 @@
 #ifndef FILE_LISTENER_BINDING_HPP
 #define FILE_LISTENER_BINDING_HPP
 
-#include "Bindings/Listeners/FileListener.h"
+#include "filerix/Listeners/FileListener.h"
 
 #include <napi.h>
 

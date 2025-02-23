@@ -1,7 +1,7 @@
 #ifndef USER_BINDING_HPP
 #define USER_BINDING_HPP
 
-#include "Bindings/FileSystem/UserUtils.h"
+#include "filerix/FileSystem/UserUtils.h"
 
 #include <napi.h>
 

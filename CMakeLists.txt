@@ -25,5 +25,5 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  LIBRARY DESTINATION /usr/lib64/node_modules/filerix
+  DESTINATION lib/node_modules/filerix
 )

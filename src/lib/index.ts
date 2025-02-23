@@ -12,7 +12,7 @@ const possiblePaths = [
 const addonPath = possiblePaths.find(fs.existsSync);
 
 if (!addonPath) {
-  console.error(`Error: Ensure that 'node-filerix' is installed or built. Expected file not found: ${addonPath}`);
+  console.error(`Error: Ensure that 'node-filerix' is installed or built. Expected file not found: ${possiblePaths}`);
   process.exit(1);
 }
 

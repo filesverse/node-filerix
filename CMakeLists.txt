@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
+include(GNUInstallDirs)
+
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
 project(node-filerix VERSION 1.1.1 LANGUAGES CXX)
@@ -25,5 +27,5 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/node_modules/filerix
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/node_modules/filerix
 )

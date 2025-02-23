@@ -25,6 +25,5 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  LIBRARY DESTINATION lib/node_modules/filerix
-  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/node_modules/filerix
 )

@@ -34,5 +34,5 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  DESTINATION ${CMAKE_INSTALL_DATADIR}/filerix
+  DESTINATION share/filerix
 )

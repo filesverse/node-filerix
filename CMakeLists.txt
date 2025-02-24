@@ -34,5 +34,5 @@ target_link_libraries(node_filerix PRIVATE
 )
 
 install(TARGETS node_filerix
-  DESTINATION filerix
+  DESTINATION share/filerix
 )

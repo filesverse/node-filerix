@@ -16,12 +16,6 @@ find_package(unofficial-node-addon-api CONFIG REQUIRED)
 
 add_library(node_filerix SHARED wrapper.cc)
 
-set(CMAKE_SKIP_RPATH TRUE)
-set(CMAKE_SKIP_INSTALL_RPATH TRUE)
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-set_target_properties(node_filerix PROPERTIES INSTALL_RPATH "" BUILD_RPATH "")
-
 set_target_properties(node_filerix PROPERTIES 
   OUTPUT_NAME "filerix"
   PREFIX "" 

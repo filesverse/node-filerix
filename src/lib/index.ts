@@ -13,7 +13,11 @@ const possiblePaths = [
 const addonPath = possiblePaths.find(fs.existsSync);
 
 if (!addonPath) {
-  console.error(`Error: Ensure that 'node-filerix' is installed or built. Expected file not found: ${possiblePaths}`);
+  console.error(
+    "Error: 'node-filerix' was not found.\n" +
+    "Expected in the following locations:\n" +
+    possiblePaths.map(path => `  - ${path}`).join("\n")
+  );
   process.exit(1);
 }
 
@@ -22,7 +26,10 @@ let filerix: Filerix;
 try {
   filerix = require(addonPath);
 } catch (error) {
-  console.error("Error: Failed to load 'node-filerix'. Ensure it is built correctly.", error);
+  console.error(
+    `Error: Failed to load 'node-filerix' from:\n  ${addonPath}\n` +
+    "Ensure it is installed and built correctly."
+  );
   process.exit(1);
 }
 

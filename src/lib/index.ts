@@ -5,6 +5,7 @@ const require = createRequire(import.meta.url);
 
 const possiblePaths = [
   "/usr/local/lib/node_modules/filerix/filerix.node",
+  "/usr/local/lib64/node_modules/filerix/filerix.node",
   "/usr/lib/node_modules/filerix/filerix.node",
   "/usr/lib64/node_modules/filerix/filerix.node"
 ];

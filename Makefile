@@ -36,7 +36,7 @@ check-vcpkg:
 
 uninstall:
 	@echo "Removing installed files..."
-	rm -f $(PREFIX)/lib64/node_modules/filerix.node
+	rm -f $(PREFIX)/lib64/node_modules/filerix/filerix.node
 	@echo "Uninstallation complete!"
 
 clean:
